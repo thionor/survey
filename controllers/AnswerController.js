@@ -18,6 +18,20 @@ class AnswerController {
         }
     }
 
+    async updateAnswer(title, questionId, answerId) {
+        try {
+            const result = await database.query("UPDATE Answers SET title = ?, questionId = ? where id = ?" , [title, questionId, answerId]);
+            if(result.affectedRows > 0) {
+                return new Answer(answerId, title, questionId);
+            }
+           
+            return null;
+        } catch(error) {
+            console.log("Error to update question", error)
+            throw error;
+        }
+    }
+
     async findAnswerById(id) {
         try {
             const rows = await database.query("SELECT id, title, questionId FROM Answers where id = ?", [id]);

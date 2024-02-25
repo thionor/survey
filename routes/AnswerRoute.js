@@ -13,6 +13,18 @@ router.post("/create", async (req, res) => {
     }
 });
 
+router.put("/:id", async (req, res) => {
+    try {
+        const {title, questionId} = req.body;
+        const id = req.params.id;
+        const answer = await AnswerController.updateAnswer(title, questionId, id);
+        return res.status(200).json(answer);
+    } catch(error) {
+        console.log("Error:", error);
+        return res.status(500).json({ error: "Unable to update answer by id" });
+    }
+});
+
 router.get("/:id", async (req, res) => {
     try {
         const id = req.params.id;

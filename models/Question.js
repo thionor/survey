@@ -1,7 +1,8 @@
 class Question {
-    constructor(id, title, surveyId) {
+    constructor(id, title, type, surveyId) {
         this.id = id;
         this.title = title;
+        this.type = type;
         this.surveyId = surveyId;
     }
 }
